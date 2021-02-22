@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import sanitizer from 'sanitizer';
 import isEmpty from 'lodash/isEmpty';
+import { registerNewUser } from '../services/auth';
 import { hasAllKeys } from '../utils';
 
 export const signUp = async (req: Request, res: Response) => {
@@ -11,6 +12,6 @@ export const signUp = async (req: Request, res: Response) => {
   }
   const email = sanitizer.sanitize(req.body.email);
   const password = sanitizer.sanitize(req.body.password);
-  console.log('body: ', { email, password });
-  return res.send({ post: 'you made a post request to sign up' });
+  const user = await registerNewUser({ email, password });
+  return res.status(user.code).send(user);
 };
