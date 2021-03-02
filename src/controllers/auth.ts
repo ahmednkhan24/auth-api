@@ -12,6 +12,6 @@ export const signUp = async (req: Request, res: Response) => {
   }
   const email = sanitizer.sanitize(req.body.email);
   const password = sanitizer.sanitize(req.body.password);
-  const user = await registerNewUser({ email, password });
-  return res.status(user.code).send(user);
+  const responseObj = await registerNewUser({ email, password });
+  return res.status(responseObj.statusCode).send(responseObj);
 };

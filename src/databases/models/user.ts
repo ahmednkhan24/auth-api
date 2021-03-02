@@ -1,5 +1,10 @@
 import mongoose from 'mongoose';
 
+export interface IUser extends mongoose.Document {
+  email: string;
+  password: string;
+}
+
 const fields = {
   email: {
     type: String,
@@ -17,6 +22,6 @@ const fields = {
 const userSchema = new mongoose.Schema(fields);
 
 // compile the schema into a model
-const userModel = mongoose.model('User', userSchema);
+const userModel = mongoose.model<IUser>('User', userSchema);
 
 export default userModel;

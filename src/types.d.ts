@@ -1,18 +1,20 @@
-import { Document } from 'mongoose';
-
+// object declarations
 declare type Credentials = {
   email: string;
   password: string;
 };
 
-declare type MongoUser = Document<Credentials>;
-
-declare type RegisteredResponse = {
+declare type ApiReturnObject = {
+  statusCode: number;
   error: boolean;
-  code: number;
-  data?: MongoUser;
+  data?: any;
 };
 
-declare type RegisterNewUser = (
-  creds: Credentials
-) => Promise<RegisteredResponse>;
+// function declarations
+declare type CreateReturnObject = (
+  statusCode: number,
+  error: boolean,
+  data?: any
+) => ApiReturnObject;
+
+declare type RegisterNewUser = (creds: Credentials) => Promise<ApiReturnObject>;

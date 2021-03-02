@@ -6,3 +6,13 @@ import has from 'lodash/has';
  */
 export const hasAllKeys = (obj: object, keys: string[]) =>
   keys.every((key) => has(obj, key));
+
+export const createApiResponse: CreateReturnObject = (
+  statusCode,
+  error,
+  data?
+) => ({
+  statusCode,
+  error,
+  data,
+});

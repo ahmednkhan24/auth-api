@@ -1,45 +1,19 @@
-import UserModel from '../databases/models/user';
-
-// import { Document } from 'mongoose';
-
-// declare type Credentials = {
-//   email: string;
-//   password: string;
-// };
-
-// declare type MongoUser = Document<Credentials>;
-
-// declare type RegisteredResponse = {
-//   error: boolean;
-//   code: number;
-//   data?: MongoUser;
-// };
-
-// declare type RegisterNewUser = (
-//   creds: Credentials
-// ) => Promise<RegisteredResponse>;
+import UserModel, { IUser } from '../databases/models/user';
+import { createApiResponse } from '../utils';
 
 export const registerNewUser: RegisterNewUser = async ({ email, password }) => {
   try {
-    const newUser: Document<Credentials> = await UserModel.create({
+    const newUser: IUser = await UserModel.create({
       email,
       password,
     });
-    return {
-      error: false,
-      code: 201,
-      data: newUser,
-    };
+    return createApiResponse(201, false, newUser);
   } catch (err) {
     if (err.name === 'MongoError' && err.code === 11000) {
-      return {
-        error: true,
-        code: 409, // duplicate user
-      };
+      // duplicate user
+      return createApiResponse(409, true);
     }
-    return {
-      error: true,
-      code: 500, // unknown error
-    };
+    // unknown error
+    return createApiResponse(500, true);
   }
 };
