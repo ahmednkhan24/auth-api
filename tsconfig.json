@@ -8,11 +8,6 @@
     "strict": true,
     "moduleResolution": "node"
   },
-  "include": [
-    "./src/**/*.ts",
-    "./src/**/*.spec.ts",
-    "./src/**/*.d.ts",
-    "./types.d.ts"
-  ],
-  "exclude": ["./node_modules"]
+  "include": ["./src/**/*.ts", "./src/**/*.d.ts", "./types.d.ts"],
+  "exclude": ["./node_modules", "./src/**/*.spec.ts"]
 }
