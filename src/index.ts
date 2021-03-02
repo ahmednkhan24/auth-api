@@ -1,7 +1,7 @@
 import dotenv from 'dotenv';
-import startServer from './server';
+import startServer from './main/server';
 import connectToDb from './databases';
-import app from './app';
+import app from './main/app';
 
 dotenv.config({ path: '.env' });
 

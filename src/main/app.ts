@@ -1,7 +1,7 @@
 import express, { Application } from 'express';
 import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
-import routes from './routes';
+import routes from '../routes';
 
 dotenv.config({ path: '.env' });
 
