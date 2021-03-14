@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
-import UserModel from '../databases/models/user';
+import UserModel from '../databases/models/User';
 import { createApiResponse } from '../utils';
 
 export default (req: Request, res: Response, next: NextFunction) => {

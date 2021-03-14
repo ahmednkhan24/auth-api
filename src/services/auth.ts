@@ -1,4 +1,4 @@
-import UserModel, { IUser } from '../databases/models/user';
+import UserModel, { IUser } from '../databases/models/User';
 import { createApiResponse, generateToken } from '../utils';
 
 export const registerNewUser: AuthUser = async ({ email, password }) => {
