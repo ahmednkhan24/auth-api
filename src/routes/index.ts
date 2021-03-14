@@ -1,10 +1,11 @@
 import express from 'express';
 import { root } from '../controllers';
 import { signUp } from '../controllers/auth';
+import requireAuth from '../middlewares/requireAuth';
 
 const router = express.Router();
 
-router.route('/').get(root);
+router.route('/').get(requireAuth, root);
 
 router.route('/signup').post(signUp);
 
