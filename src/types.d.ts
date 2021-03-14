@@ -17,4 +17,6 @@ declare type CreateReturnObject = (
   data?: any
 ) => ApiReturnObject;
 
-declare type RegisterNewUser = (creds: Credentials) => Promise<ApiReturnObject>;
+declare type AuthUser = (creds: Credentials) => Promise<ApiReturnObject>;
+
+declare type ValidateAndSanitizeBody = (body: any) => ApiReturnObject;

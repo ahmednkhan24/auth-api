@@ -1,16 +1,14 @@
-import jwt from 'jsonwebtoken';
 import UserModel, { IUser } from '../databases/models/user';
-import { createApiResponse } from '../utils';
+import { createApiResponse, generateToken } from '../utils';
 
-export const registerNewUser: RegisterNewUser = async ({ email, password }) => {
+export const registerNewUser: AuthUser = async ({ email, password }) => {
   try {
     const newUser: IUser = await UserModel.create({
       email,
       password,
     });
 
-    const key = process.env.JWT_SIGNING_KEY || 'MY-SECRET-KEY';
-    const token = jwt.sign({ userId: newUser._id }, key);
+    const token = generateToken(newUser._id);
 
     return createApiResponse(201, false, token);
   } catch (err) {
@@ -20,5 +18,23 @@ export const registerNewUser: RegisterNewUser = async ({ email, password }) => {
     }
     // unknown error
     return createApiResponse(500, true);
+  }
+};
+
+export const authenticateUser: AuthUser = async ({ email, password }) => {
+  try {
+    const user = await UserModel.findOne({ email });
+
+    if (!user) {
+      return createApiResponse(401, true, 'Invalid email or password');
+    }
+
+    await user.validatePassword(password);
+    const token = generateToken(user._id);
+
+    return createApiResponse(200, false, token);
+  } catch (err) {
+    // unknown error
+    return createApiResponse(401, true, 'Invalid email or password');
   }
 };

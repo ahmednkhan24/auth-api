@@ -4,6 +4,7 @@ import bcrypt from 'bcrypt';
 export interface IUser extends mongoose.Document {
   email: string;
   password: string;
+  validatePassword: (attemptedPassword: string) => Promise<Object | boolean>;
 }
 
 const fields = {
