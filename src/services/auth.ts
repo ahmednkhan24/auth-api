@@ -1,3 +1,4 @@
+import jwt from 'jsonwebtoken';
 import UserModel, { IUser } from '../databases/models/user';
 import { createApiResponse } from '../utils';
 
@@ -7,7 +8,12 @@ export const registerNewUser: RegisterNewUser = async ({ email, password }) => {
       email,
       password,
     });
-    return createApiResponse(201, false, newUser);
+
+    const key = process.env.JWT_SIGNING_KEY || 'MY-SECRET-KEY';
+    const token = jwt.sign({ userId: newUser._id }, key);
+    console.log({ key, token });
+
+    return createApiResponse(201, false, token);
   } catch (err) {
     if (err.name === 'MongoError' && err.code === 11000) {
       // duplicate user
