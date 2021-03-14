@@ -11,7 +11,6 @@ export const registerNewUser: RegisterNewUser = async ({ email, password }) => {
 
     const key = process.env.JWT_SIGNING_KEY || 'MY-SECRET-KEY';
     const token = jwt.sign({ userId: newUser._id }, key);
-    console.log({ key, token });
 
     return createApiResponse(201, false, token);
   } catch (err) {
