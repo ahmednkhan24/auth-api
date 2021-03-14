@@ -6,7 +6,8 @@ dotenv.config({ path: '.env' });
 
 const app: Application = express();
 
-app.use(express.json());
+app.use(express.json()); // Used to parse JSON bodies
+app.use(express.urlencoded()); // Parse URL-encoded bodies
 
 app.use(routes);
 
