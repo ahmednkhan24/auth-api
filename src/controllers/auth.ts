@@ -7,7 +7,7 @@ import { hasAllKeys, createApiResponse } from '../utils';
 export const signUp = async (req: Request, res: Response) => {
   if (isEmpty(req.body) || !hasAllKeys(req.body, ['email', 'password'])) {
     const responseObj = createApiResponse(400, true);
-    return res.status(responseObj.statusCode).send(responseObj);
+    return res.status(responseObj.statusCode).json(responseObj);
   }
 
   const email = sanitizer.sanitize(req.body.email);
@@ -15,9 +15,9 @@ export const signUp = async (req: Request, res: Response) => {
 
   if (!email || !password) {
     const responseObj = createApiResponse(400, true);
-    return res.status(responseObj.statusCode).send(responseObj);
+    return res.status(responseObj.statusCode).json(responseObj);
   }
 
   const responseObj = await registerNewUser({ email, password });
-  return res.status(responseObj.statusCode).send(responseObj);
+  return res.status(responseObj.statusCode).json(responseObj);
 };
