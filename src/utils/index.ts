@@ -1,14 +1,14 @@
 import sanitizer from 'sanitizer';
 import jwt from 'jsonwebtoken';
-import has from 'lodash/has';
-import isEmpty from 'lodash/isEmpty';
+import has from 'lodash/fp/has';
+import isEmpty from 'lodash/fp/isEmpty';
 
 /*
  * returns true if all keys are properties within the obj object
  * returns false on first key not found within the obj object
  */
 export const hasAllKeys = (obj: object, keys: string[]) =>
-  keys.every((key) => has(obj, key));
+  keys.every((key) => has(key, obj));
 
 export const createApiResponse: CreateReturnObject = (
   statusCode,
