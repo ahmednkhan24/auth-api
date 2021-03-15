@@ -19,4 +19,4 @@ declare type CreateReturnObject = (
 
 declare type AuthUser = (creds: Credentials) => Promise<ApiReturnObject>;
 
-declare type ValidateAndSanitizeAuthBody = (body: any) => ApiReturnObject;
+declare type ValidateAndSanitizeBody = (body: any) => ApiReturnObject;
