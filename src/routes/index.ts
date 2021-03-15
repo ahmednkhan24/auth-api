@@ -17,8 +17,9 @@ router
   .get(requireAuth, getTracks)
   .post(requireAuth, postTracks);
 
+// catch all
 router.get('*', (req, res) => {
-  res.send({ 404: 'Not Found' });
+  res.status(404).json({ 404: 'Not Found' });
 });
 
 export default router;
