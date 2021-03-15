@@ -7,7 +7,7 @@ export interface IUser extends mongoose.Document {
   validatePassword: (attemptedPassword: string) => Promise<Object | boolean>;
 }
 
-const fields = {
+const properties = {
   email: {
     type: String,
     trim: true,
@@ -21,7 +21,7 @@ const fields = {
 };
 
 // create a schema using predefined fields
-const userSchema = new mongoose.Schema(fields);
+const userSchema = new mongoose.Schema(properties);
 
 /*
  * Hash and Salt password before saving to database
