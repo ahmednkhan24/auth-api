@@ -20,7 +20,9 @@ export const createApiResponse: CreateReturnObject = (
   data,
 });
 
-export const validateAndSanitizeBody: ValidateAndSanitizeBody = (body) => {
+export const validateAndSanitizeAuthBody: ValidateAndSanitizeAuthBody = (
+  body
+) => {
   if (isEmpty(body) || !hasAllKeys(body, ['email', 'password'])) {
     return createApiResponse(400, true);
   }

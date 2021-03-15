@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { registerNewUser, authenticateUser } from '../services/auth';
-import { validateAndSanitizeBody } from '../utils';
+import { validateAndSanitizeAuthBody } from '../utils';
 
 export type AuthCallback = (
   req: Request,
@@ -9,7 +9,7 @@ export type AuthCallback = (
 ) => Promise<Response>;
 
 const authCallback: AuthCallback = async (req, res, callback) => {
-  const validatedObj = validateAndSanitizeBody(req.body);
+  const validatedObj = validateAndSanitizeAuthBody(req.body);
 
   if (validatedObj.error) {
     return res.status(validatedObj.statusCode).json(validatedObj);
